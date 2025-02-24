@@ -1,0 +1,37 @@
+# loans.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loans-hn
+  namespace: group1-team7
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loans-hn
+  template:
+    metadata:
+      labels:
+        app: loans-hn
+    spec:
+      containers:
+      - name: loans-hn
+        image: k8s-vga-worker1:5000/group1-team7-loans-hn:latest
+        imagePullPolicy: Always #IfNotPresent
+        ports:
+        - containerPort: 9103
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loans-hn
+  namespace: group1-team7
+spec:
+  selector:
+    app: loans-hn
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9103
+      nodePort: 30734
+  type: NodePort

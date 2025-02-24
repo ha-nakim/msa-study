@@ -14,6 +14,7 @@ import com.eazybytes.cards.dto.LoansDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
@@ -105,5 +106,17 @@ public class CardsServiceImpl implements ICardsService {
         return loan;
     }
 
+    /**
+     *
+     * @param mobileNumber - Input mobile Number
+     * @return Card Details based on a given mobileNumber
+     */
+    @Override
+    public Map<String, String> fetchHostInfo() {
+      Map<String, String> hostInfo = loansDetailsClient.fetchHostInfo().orElseThrow(
+                () -> new ResourceNotFoundException("Loan", "hostInfo",null)
+        );
+        return hostInfo;
+    }
 
 }

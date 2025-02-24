@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         REGISTRY = "k8s-vga-worker1:5000"
-        IMAGE_NAME = "group1-team7-accounts-hn"
+        IMAGE_NAME = "group1-team7-loans-hn"
         IMAGE_TAG = "latest"
         NAMESPACE = "group1-team7"
         JAVA_HOME = "/usr/local/java21"
@@ -21,7 +21,7 @@ pipeline {
                   checkout([
                       $class: 'GitSCM',
                       branches: [[name: '*/main']],  
-                      extensions: [[$class: 'SparseCheckoutPaths', paths: ['accounts']]], 
+                      extensions: [[$class: 'SparseCheckoutPaths', paths: ['loans']]], 
                       userRemoteConfigs: [[url: 'https://github.com/ha-nakim/msa-study.git']]
                   ])
               }
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Build with Gradle') {
             steps {
-              dir('accounts') {
+              dir('loans') {
                 script {
                     // Gradle 실행권한
                     // sh 'chmod +x ./gradlew'
@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-              dir('accounts') {
+              dir('loans') {
                 script {
                     sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ."
                 }
@@ -52,7 +52,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-              dir('accounts') {
+              dir('loans') {
                 script {
                     // Docker 이미지를 Registry Server에 푸시
                     sh "docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
@@ -62,10 +62,10 @@ pipeline {
         }
         stage('Deploy and Service to Kubernetes') {
             steps {
-              dir('accounts') {
+              dir('loans') {
                 script {
                     // Kubernetes Deployment and Service 생성 및 적용 (1일차 교육때 사용한 deploy & service 생성 yaml 파일 등록하여 사용)
-                    sh "kubectl apply -f ./yaml/accounts.yaml -n ${NAMESPACE}"
+                    sh "kubectl apply -f ./yaml/loans.yaml -n ${NAMESPACE}"
                 }
               }
             }
@@ -74,7 +74,7 @@ pipeline {
             steps {
                 script {
                     // Kubenetes에서 특정 Deployment의 컨테이너 이미지를 업데이트 (아래 이름은 중복되지 않게 주의하여 지정, deployment, selector 이름으로)
-                    sh "kubectl set image deployment.apps/accounts-hn accounts-hn=${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} --namespace=${NAMESPACE}"
+                    sh "kubectl set image deployment.apps/loans-hn loans-hn=${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} --namespace=${NAMESPACE}"
                 }
             }
         }

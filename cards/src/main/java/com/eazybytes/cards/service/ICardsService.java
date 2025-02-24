@@ -1,5 +1,7 @@
 package com.eazybytes.cards.service;
 
+import java.util.Map;
+
 import com.eazybytes.cards.dto.CardsDto;
 import com.eazybytes.cards.dto.LoansDto;
 
@@ -38,5 +40,11 @@ public interface ICardsService {
      *  @return Loan Details based on a given mobileNumber
      */
     LoansDto fetchTotalLoan(String mobileNumber);
+
+    /**
+     *
+     *  @return Loan host info
+     */
+    Map<String, String> fetchHostInfo();
 
 }

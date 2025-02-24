@@ -14,6 +14,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+
+import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -163,6 +168,42 @@ public class LoansController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
         }
+    }
+
+
+    @Operation(
+            summary = "Fetch Loan server Host Info REST API",
+            description = "REST API to fetch Host Info."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+
+    @GetMapping("/fetchHostInfo")
+    public ResponseEntity<Map<String, String>> fetchHostInfo() {
+      Map<String, String> rsMap = new HashMap<String ,String>();
+      try {
+        // 로컬 시스템의 IP 주소 조회
+        InetAddress localHost = InetAddress.getLocalHost();
+        String hostName = localHost.getHostName();
+        String localIP = localHost.getHostAddress();
+        rsMap.put("localIP", localIP);
+        rsMap.put("hostName", hostName);
+      } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("Error occurred while retrieving local IP address.");
+      }
+      return ResponseEntity.status(HttpStatus.OK).body(rsMap);
     }
 
 }
