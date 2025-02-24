@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: cards-hn
-        image: k8s-vga-worker1:5000/group1-team7-cards-hn:latest
+        image: k8s-vga-worker1:5000/group1-team7-cards-hn1:latest
         imagePullPolicy: Always #IfNotPresent
         ports:
         - containerPort: 9102

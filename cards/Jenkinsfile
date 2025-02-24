@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         REGISTRY = "k8s-vga-worker1:5000"
-        IMAGE_NAME = "group1-team7-cards-hn"
+        IMAGE_NAME = "group1-team7-cards-hn1"
         IMAGE_TAG = "latest"
         NAMESPACE = "group1-team7"
         JAVA_HOME = "/usr/local/java21"
