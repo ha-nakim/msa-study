@@ -5,7 +5,7 @@ metadata:
   name: accounts-hn
   namespace: group1-team7
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: accounts-hn
@@ -33,5 +33,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 9101
-      nodePort: 30731
+      nodePort: 30732
   type: NodePort
