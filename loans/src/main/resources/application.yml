@@ -1,0 +1,30 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: eureka-client-loans
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10  # 기본값 30 → 10초마다 갱신 요청
+    lease-expiration-duration-in-seconds: 30  # 기본값 90 → 30초 이상 갱신 없으면 제거
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 5  # 기본값 30 → 5초마다 Eureka 서버에서 인스턴스 정보 가져오기
+    service-url:
+      defaultZone: http://eureka-server:80/eureka/ #Eureka Server 명시

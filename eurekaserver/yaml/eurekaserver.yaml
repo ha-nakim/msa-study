@@ -1,0 +1,37 @@
+# springboot-app.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-server-hn
+  namespace: group1-team7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-server-hn
+  template:
+    metadata:
+      labels:
+        app: eureka-server-hn
+    spec:
+      containers:
+      - name: eureka-server-hn
+        image: k8s-vga-worker1:5000/group1-team7-eurekaserver-hn:latest
+        imagePullPolicy: Always #IfNotPresent
+        ports:
+        - containerPort: 9100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: edu-app2
+  namespace: group1-team7
+spec:
+  selector:
+    app: edu-app2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9100
+      nodePort: 30731
+  type: NodePort

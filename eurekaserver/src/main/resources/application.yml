@@ -1,0 +1,15 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: discovery-service
+
+# eureka 설정
+# false로 하지 않으면 자기 자신을 클라이언트로 등록함
+eureka:
+  client:
+    register-with-eureka: false #eureka server를 registry에 등록할지 여부
+    fetch-registry: false       #registry에 있는 정보들을 가져올지 여부
+    # peer awareness 설정(여러개 server를 띄워서 서버 재기동시 client 정보가 유지되도록하는 설정)
+    # => eureka.client.service-url.defaultZone=http://eureka1주소,http://eureka2주소
