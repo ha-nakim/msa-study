@@ -24,11 +24,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: edu-app2
+  name: eureka-server-hn
   namespace: group1-team7
 spec:
   selector:
-    app: edu-app2
+    app: eureka-server-hn
   ports:
     - protocol: TCP
       port: 80
