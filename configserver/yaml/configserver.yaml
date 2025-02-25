@@ -5,7 +5,7 @@ metadata:
   name: configserver-hn
   namespace: group1-team7
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: configserver-hn
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: configserver-hn
-        image: k8s-vga-worker1:5000/group1-team7-configserver-hn:latest
+        image: k8s-vga-worker1:5000/group1-team7-configserver-hn1:latest
         imagePullPolicy: Always #IfNotPresent
         ports:
         - containerPort: 9200
