@@ -46,9 +46,6 @@ public class AccountsController {
 
     private AccountsContactInfoDto accountsContactInfoDto;
 
-    @Value("${build.version}")
-    private String buildVersion;
-
     @Operation(
             summary = "Create Account REST API",
             description = "REST API to create new Customer &  Account inside EazyBank"
@@ -198,37 +195,8 @@ public class AccountsController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(accountsContactInfoDto);
-    }
 
-    @Operation(
-            summary = "Get Build information",
-            description = "Get Build information that is deployed into accounts microservice"
-    )
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "HTTP Status OK"
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "HTTP Status Internal Server Error",
-                    content = @Content(
-                            schema = @Schema(implementation = ErrorResponseDto.class)
-                    )
-            )
-    }
-    )
-
-    // @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
-    @GetMapping("/build-info")
-    public ResponseEntity<String> getBuildInfo() throws TimeoutException {
-        logger.debug("Invoked Loans build-info API");
-        return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(buildVersion);
-        // throw new java.util.concurrent.TimeoutException("Intentional TimeoutException to trigger retry and open Circuit Breaker");
-    }
-
+              }
     public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
         logger.debug("getBuildInfoFallback() method Invoked");
         return ResponseEntity
