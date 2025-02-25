@@ -1,6 +1,5 @@
 package com.eazybytes.accounts.controller;
 
-import com.eazybytes.accounts.AccountsContactInfoDto;
 import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.dto.ErrorResponseDto;
@@ -44,7 +43,7 @@ public class AccountsController {
 
     private IAccountsService iAccountsService;
 
-    private AccountsContactInfoDto accountsContactInfoDto;
+    private AccountsConstants accountsContactInfoDto;
 
     @Value("${build.version}")
     private String buildVersion;
