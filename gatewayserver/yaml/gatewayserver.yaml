@@ -5,7 +5,7 @@ metadata:
   name: gatewayserver-hn
   namespace: group1-team7
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: gatewayserver-hn
@@ -32,6 +32,6 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 9202
+      targetPort: 9302
       nodePort: 30736
   type: NodePort
