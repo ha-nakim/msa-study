@@ -11,7 +11,7 @@ spring:
     config:
       server:
         git:
-          uri: "https://github.com/ha-nakim/msa_config.git"
+          uri: "https://github.com/ha-nakim/msa-study.git"
           default-label: main
           timeout: 5
           clone-on-start: true
