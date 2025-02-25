@@ -4,7 +4,7 @@ spring:
   profiles:
     active: "prod"
   application:
-    name: account
+    name: accounts
   datasource:
     url: jdbc:mysql://team7-mysql:3306/team7_DB
     driverClassName: com.mysql.cj.jdbc.Driver
