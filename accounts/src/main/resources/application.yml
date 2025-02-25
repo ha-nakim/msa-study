@@ -1,6 +1,8 @@
 server:
   port: 9101
 spring:
+  profiles:
+    active: "prod"
   application:
     name: account
   datasource:
@@ -46,4 +48,4 @@ eureka:
     fetch-registry: true
     registry-fetch-interval-seconds: 30  # 기본값 30 → 5초마다 Eureka 서버에서 인스턴스 정보 가져오기
     service-url:
-      defaultZone: http://192.168.100.221:30731/eureka/ #Eureka Server 명시
+      defaultZone: http://eureka-server-hn:80/eureka/ #Eureka Server 명시

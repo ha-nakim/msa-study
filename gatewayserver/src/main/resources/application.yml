@@ -1,0 +1,63 @@
+server:
+  port: 9202
+
+spring:
+  profiles:
+    active: "prod"
+  application:
+    name: "gatewayserver"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          ## locate all services registered in Eureka server (Actuator to get the list of services)
+          # enabled: true
+          lower-case-service-id: true
+      httpclient:
+        ## default 30000,
+        connect-timeout: 1000
+        ## default unlimited
+        response-timeout: 2s
+  config:
+    import: "optional:configserver:http://configserver-hn:80/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+  service-url:
+      defaultZone: http://eureka-server-hn:80/eureka/
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
+
+logging:
+  level:
+    com:
+      eazybytes:
+        gatewayserver: DEBUG
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Eazy Bank Gateway Server Application"
+    version: "1.0.0"
