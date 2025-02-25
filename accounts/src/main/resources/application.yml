@@ -15,12 +15,26 @@ spring:
         ddl-auto: update
         show-sql: true
         format_sql: true
+  config:
+    import: "optional:configserver:http://configserver-hn:80/"
 
 logging:
   level:
     org.hibernate.SQL: debug      # 실행된 SQL 출력
     org.hibernate.type.descriptor.sql.BasicBinder: trace  # SQL에 바인딩된 파라미터 값 출력
 
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
 
 eureka:
   instance:
