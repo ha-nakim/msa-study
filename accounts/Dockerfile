@@ -7,4 +7,4 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} configserver.jar
 
 # execute the application
-ENTRYPOINT ["java", "-jar", "configserver.jar"]
+ENTRYPOINT ["java", "-jar", "configserver.jar", "--spring.profiles.active=prod"]
