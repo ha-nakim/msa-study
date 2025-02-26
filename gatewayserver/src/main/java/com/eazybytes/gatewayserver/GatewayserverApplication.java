@@ -25,28 +25,31 @@ public class GatewayserverApplication {
 	public RouteLocator mgbankRouteConfig(RouteLocatorBuilder routeLocatorBuilder) {
 		logger.debug("Configuring routes for TEAM7");
 		return routeLocatorBuilder.routes()
-            .route(p -> p
+            .route("accounts", p -> p
                 .path("/team7/accounts/**")
                 .filters( f -> f.rewritePath("/team7/accounts/(?<segment>.*)","/${segment}")
                     .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
                     .circuitBreaker(config -> config.setName("accountsCircuitBreaker")
-                    // .setFallbackUri("forward:/contactSupport")
+                      .setFallbackUri("forward:/fallback?routeId=accounts")
                     )
                 )
                 .uri("lb://ACCOUNTS"))
-            .route(p -> p
+            .route("loans", p -> p
                 .path("/team7/loans/**")
                 .filters( f -> f.rewritePath("/team7/loans/(?<segment>.*)","/${segment}")
                     .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-						    .retry(retryConfig -> retryConfig.setRetries(3)
-                    	.setMethods(HttpMethod.GET)
-                    	.setBackoff(Duration.ofMillis(100),Duration.ofMillis(1000),2,true))
+                    .circuitBreaker(config -> config.setName("loansCircuitBreaker")
+                      .setFallbackUri("forward:/fallback?routeId=loans")
+                    )
                 )
                 .uri("lb://LOANS"))
-            .route(p -> p
+            .route("cards", p -> p
                 .path("/team7/cards/**")
                 .filters( f -> f.rewritePath("/team7/cards/(?<segment>.*)","/${segment}")
                     .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                    .circuitBreaker(config -> config.setName("cardsCircuitBreaker")
+                      .setFallbackUri("forward:/fallback?routeId=cards")
+                    )
                 )
                 .uri("lb://CARDS")).build();
 	}
