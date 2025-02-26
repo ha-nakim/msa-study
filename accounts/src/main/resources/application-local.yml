@@ -2,10 +2,3 @@ spring:
   config:
     #import: "optional:configserver:http://localhost:9200/"
     import: "optional:configserver:http://192.168.100.221:30735/"
-  datasource:
-      url: jdbc:mysql://192.168.100.221:30701/team7_DB
-      driverClassName: com.mysql.cj.jdbc.Driver
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:9100/eureka/ #Eureka Server 명시
