@@ -7,4 +7,4 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} cards.jar
 
 # execute the application
-ENTRYPOINT ["java", "-jar", "cards.jar"]
+ENTRYPOINT ["java", "-jar", "cards.jar", "--spring.profiles.active=prod"]

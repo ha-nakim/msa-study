@@ -1,6 +1,15 @@
 build:
   version: "2.0"
 
+spring:
+  datasource:
+      url: jdbc:mysql://192.168.100.221:30701/team7_DB
+      driverClassName: com.mysql.cj.jdbc.Driver
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9100/eureka/ #Eureka Server 명시
+
 cards:
   message: "Welcome to EazyBank cards related QA APIs "
   contactDetails:
