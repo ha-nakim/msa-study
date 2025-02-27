@@ -17,12 +17,12 @@ spring:
           #destination: send-communication
         sendMessage-out-0:
           destination: message-send
-rabbitmq:
-  host: 192.168.100.221
-  port: 30703
-  username: admin
-  password: admin
-  connection-timeout: 10s
+  rabbitmq:
+    host: 192.168.100.221
+    port: 30703
+    username: admin
+    password: admin
+    connection-timeout: 10s
               
 eureka:
   client:
