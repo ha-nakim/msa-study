@@ -2,6 +2,8 @@ server:
   port: 9310
 
 spring:
+  profiles:
+    active: @spring.profiles.active@
   application:
     name: "message"
   cloud:

@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: "prod"
+    active: @spring.profiles.active@
   application:
     name: "gatewayserver"
   cloud:
@@ -25,16 +25,7 @@ spring:
         errorEvent-in-0:   # Consumer가 메시지 받음
           destination: error-events
           group: mail-service
-  config:
-    import: "optional:configserver:http://configserver-hn:80/"
 
-  rabbitmq:
-    host: 192.168.100.221
-    port: 30703
-    username: admin
-    password: admin
-    connection-timeout: 10s
-    
 management:
   endpoints:
     web:
@@ -46,15 +37,6 @@ management:
   info:
     env:
       enabled: true
-
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    service-url:
-      defaultZone: http://eureka-server-hn:80/eureka/
 
 resilience4j.circuitbreaker:
   configs:

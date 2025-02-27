@@ -1,12 +1,11 @@
 package com.mobigen.message.functions;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.mobigen.message.dto.MessageDto;
 
+import java.util.Map;
 import java.util.function.Function;
 
 @Configuration
@@ -17,6 +16,14 @@ public class MessageFunctions {
       return messageDto -> {
         System.out.println("Message Sent: " + messageDto.toString());
         return messageDto.service() + " : " + messageDto.message();
+      };
+    }
+
+    @Bean
+    public Function<Map<String, String>, String> mail() {
+      return map -> {
+        System.out.println("Message Sent: " + map.toString());
+        return map.get("service") + " : " + map.get("error") + "(" + map.get("url") + ")";
       };
     }
 
