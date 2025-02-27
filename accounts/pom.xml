@@ -90,6 +90,12 @@
           <groupId>org.springframework.cloud</groupId>
           <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
       </dependency>
+
+      <!-- Spring Cloud Stream (RabbitMQ) -->
+      <dependency>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+      </dependency>
   
       <!-- swagger dependency-->
       <dependency>

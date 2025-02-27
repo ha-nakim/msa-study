@@ -16,11 +16,10 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
-import java.util.concurrent.TimeoutException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -203,6 +202,34 @@ public class AccountsController {
                 .status(HttpStatus.OK)
                 .body("0.9");
     }
+    
 
+
+    @Operation(
+            summary = "Send Message",
+            description = "RabbiMQ로 메세지 전송"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/sendMessage")
+    public ResponseEntity<Boolean> sendMessage(@RequestParam String message) {
+      boolean flag = iAccountsService.sendMessage(message);
+      return ResponseEntity
+              .status(HttpStatus.OK)
+              .body(flag);
+
+    }
 
 }
