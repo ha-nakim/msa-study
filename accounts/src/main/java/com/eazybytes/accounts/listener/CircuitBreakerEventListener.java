@@ -24,7 +24,7 @@ public class CircuitBreakerEventListener {
         String message = String.format("CircuitBreaker '%s' changed from %s to %s",
                 event.getCircuitBreakerName(), event.getStateTransition().getFromState(), event.getStateTransition().getToState());
 
-        System.out.println(message);
+        System.out.println("-------------->>>>>>>>>>>" + message);
 
         // 메시지를 Kafka 등으로 전송
         streamBridge.send("circuitBreakerTopic-out-0", message);

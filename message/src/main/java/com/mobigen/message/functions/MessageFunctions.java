@@ -18,8 +18,6 @@ import java.util.function.Function;
 @AllArgsConstructor
 public class MessageFunctions {
 
-  private final JavaMailSender mailSender;
-
     @Bean
     public Function<MessageDto, String> message() {
       return messageDto -> {
@@ -31,17 +29,6 @@ public class MessageFunctions {
     @Bean
     public Function<ErrorMessageDto, String> email() {
       return mamessageDto -> {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("admin@example.com");
-        message.setSubject("[경고] 서비스 장애 발생: " + mamessageDto.service());
-        message.setText("서비스: " + mamessageDto.service() + "\n" +
-                        "URL: " + mamessageDto.url() + "\n" +
-                        "에러: " + mamessageDto.message() + "\n\n" +
-                        "긴급 점검이 필요합니다.");
-
-        mailSender.send(message);
-        System.out.println("?? 장애 경고 이메일 전송 완료!");
-        
         System.out.println("Message Sent: " + mamessageDto.toString());
         return mamessageDto.service() + " : " + mamessageDto.message();
       };

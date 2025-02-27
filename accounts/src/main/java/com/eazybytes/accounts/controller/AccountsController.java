@@ -5,6 +5,7 @@ import com.eazybytes.accounts.dto.AccountsContactInfoDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.dto.ErrorResponseDto;
 import com.eazybytes.accounts.dto.ResponseDto;
+import com.eazybytes.accounts.service.ExternalService;
 import com.eazybytes.accounts.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -41,6 +42,7 @@ public class AccountsController {
     private final Logger logger = LoggerFactory.getLogger(AccountsController.class);
 
     private IAccountsService iAccountsService;
+    private ExternalService externalService;
 
     private AccountsContactInfoDto accountsContactInfoDto;
 
@@ -229,6 +231,11 @@ public class AccountsController {
               .status(HttpStatus.OK)
               .body(flag);
 
+    }
+
+    @GetMapping("/callExternalService")
+    public String callExternalService() {
+        return externalService.callExternalService();
     }
 
 }

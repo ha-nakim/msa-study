@@ -48,8 +48,8 @@ eureka:
     registry-fetch-interval-seconds: 30  # 기본값 30 → 5초마다 Eureka 서버에서 인스턴스 정보 가져오기
 
 resilience4j.circuitbreaker:
-  configs:
-    default:
+  instances:
+    hnServiceCircuitBreaker:  # 여기서 name과 일치하는 값
       slidingWindowSize: 10
       permittedNumberOfCallsInHalfOpenState: 2
       failureRateThreshold: 50
