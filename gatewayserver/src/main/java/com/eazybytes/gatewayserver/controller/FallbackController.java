@@ -39,7 +39,7 @@ public class FallbackController {
       event.put("url", failedService);
       event.put("error", "서비스 장애 발생");
 
-      streamBridge.send("errorEvent-out-0", event);
+      streamBridge.send("sendCommunication-out-0", event);
 
       return Mono.just(response);
   }

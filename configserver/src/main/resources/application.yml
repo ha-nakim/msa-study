@@ -19,6 +19,21 @@ spring:
           searchPaths: config-files
         native:  # 이렇게 설정해두면 git에 접속 불가 시 configserver/resorces/config 폴더안에 있는 properties를 참조함
           search-locations: "classpath:/config"
+    bus:
+      enabled: true
+    stream:
+      bindings:
+        config-change-out-0:
+          destination: hn-config-change-topic
+          content-type: application/json
+          group: ${spring.application.name}
+          
+  rabbitmq:
+    host: 192.168.100.221
+    port: 30703
+    username: admin
+    password: admin
+    connection-timeout: 10s
 
 management:
   endpoints:
