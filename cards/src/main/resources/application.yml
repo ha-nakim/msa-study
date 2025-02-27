@@ -5,50 +5,9 @@ spring:
     active: @spring.profiles.active@
   application:
     name: cards
-  datasource:
-    username: team7
-    password: team7_1234
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate:
-        ddl-auto: update
-        show-sql: true
-        format_sql: true
 
 logging:
   level:
     org.hibernate.SQL: debug      # 실행된 SQL 출력
     org.hibernate.type.descriptor.sql.BasicBinder: trace  # SQL에 바인딩된 파라미터 값 출력
-
-
-# actuator
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    shutdown:
-      access: unrestricted
-  info:
-    env:
-      enabled: true
-          
-eureka:
-  instance:
-    lease-renewal-interval-in-seconds: 30  # 기본값 30 → 10초마다 갱신 요청
-    lease-expiration-duration-in-seconds: 90  # 기본값 90 → 30초 이상 갱신 없으면 제거
-    prefer-ip-address: true # Pod의 호스트명을 Eureka에 등록하도록 설정
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    registry-fetch-interval-seconds: 30  # 기본값 30 → 5초마다 Eureka 서버에서 인스턴스 정보 가져오기
-
-resilience4j.circuitbreaker:
-  configs:
-    default:
-      slidingWindowSize: 10
-      permittedNumberOfCallsInHalfOpenState: 2
-      failureRateThreshold: 50
-      waitDurationInOpenState: 10000
+    

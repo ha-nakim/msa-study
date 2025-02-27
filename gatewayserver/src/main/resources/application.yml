@@ -18,34 +18,7 @@ spring:
         connect-timeout: 1000
         ## default unlimited
         response-timeout: 2s
-    stream:
-      bindings:
-        errorEvent-out-0:  # RabbitMQ로 장애 이벤트 전송
-          destination: error-events
-        errorEvent-in-0:   # Consumer가 메시지 받음
-          destination: error-events
-          group: mail-service
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    gateway:
-      access: unrestricted
-  info:
-    env:
-      enabled: true
-
-resilience4j.circuitbreaker:
-  configs:
-    default:
-      slidingWindowSize: 10
-      permittedNumberOfCallsInHalfOpenState: 2
-      failureRateThreshold: 50
-      waitDurationInOpenState: 10000
-
+        
 logging:
   level:
     com:
