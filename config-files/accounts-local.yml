@@ -20,13 +20,13 @@ cloud:
       #sendCommunication-out-0:
         #destination: send-communication
       sendMessage-out-0:
-        destination: send-message
+        destination: message-send
 
 rabbitmq:
   host: 192.168.100.221
   port: 30703
-  username: admin
-  password: admin
+  username: guest
+  password: guest
   connection-timeout: 10s
 
 accounts:
