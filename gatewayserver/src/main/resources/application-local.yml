@@ -2,3 +2,4 @@ spring:
   config:
     #import: "optional:configserver:http://localhost:9200/"
     import: "optional:configserver:http://192.168.100.221:30735/"
+    

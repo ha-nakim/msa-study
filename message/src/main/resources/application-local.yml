@@ -2,3 +2,19 @@ spring:
   config:
     #import: "optional:configserver:http://localhost:9200/"
     import: "optional:configserver:http://192.168.100.221:30735/"
+  cloud:
+    bus:
+      enabled: true
+    stream:
+      bindings:
+        sendCommunication-out-0:
+          destination: hn-send-communication
+        sendMessage-out-0:
+          destination: message-send
+  rabbitmq:
+    host: 192.168.100.221
+    port: 30703
+    username: admin
+    password: admin
+    connection-timeout: 10s
+    

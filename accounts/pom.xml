@@ -93,13 +93,13 @@
 
       <!-- Spring Cloud Stream (RabbitMQ) -->
       <dependency>
-          <groupId>org.springframework.cloud</groupId>
-          <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
       </dependency>
 
       <dependency>
-          <groupId>org.springframework.cloud</groupId>
-          <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-bus-amqp</artifactId>
       </dependency>
   
       <!-- swagger dependency-->

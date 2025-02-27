@@ -22,7 +22,7 @@ public class MessageFunctions {
     @Bean
     public Function<Map<String, String>, String> mail() {
       return map -> {
-        System.out.println("Message Sent: " + map.toString());
+        System.out.println("Message Sent: " + map.get("error") + "(" + map.get("url") + ")");
         return map.get("service") + " : " + map.get("error") + "(" + map.get("url") + ")";
       };
     }
