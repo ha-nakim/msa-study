@@ -10,6 +10,10 @@ spring:
         #definition: updateCommunication
     stream:
       bindings:
+        config-change-in-0:
+          destination: hn-config-change-topic
+          content-type: application/json
+          group: ${spring.application.name}
         #updateCommunication-in-0:
           #destination: communication-sent
           #group: ${spring.application.name}
@@ -29,7 +33,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:9100/eureka/ #Eureka Server 명시
 accounts:
-  message: "Welcome to EazyBank accounts related QA APIs "
+  message: "Welcome to EazyBank accounts related QA APIs change chagne chagne!!"
   contactDetails:
     name: "Smitha Ray - QA Lead"
     email: "smitha@eazybank.com"
