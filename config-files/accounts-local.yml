@@ -9,26 +9,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:9100/eureka/ #Eureka Server 명시
-cloud:
-  #function:
-      #definition: updateCommunication
-  stream:
-    bindings:
-      #updateCommunication-in-0:
-        #destination: communication-sent
-        #group: ${spring.application.name}
-      #sendCommunication-out-0:
-        #destination: send-communication
-      sendMessage-out-0:
-        destination: message-send
-
-rabbitmq:
-  host: 192.168.100.221
-  port: 30703
-  username: admin
-  password: admin
-  connection-timeout: 10s
-
 accounts:
   message: "Welcome to EazyBank accounts related QA APIs "
   contactDetails:
