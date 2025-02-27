@@ -3,6 +3,7 @@ package com.eazybytes.accounts.service.impl;
 import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.AccountsDto;
 import com.eazybytes.accounts.dto.CustomerDto;
+import com.eazybytes.accounts.dto.MessageDto;
 import com.eazybytes.accounts.entity.Accounts;
 import com.eazybytes.accounts.entity.Customer;
 import com.eazybytes.accounts.exception.CustomerAlreadyExistsException;
@@ -129,7 +130,7 @@ public class AccountsServiceImpl  implements IAccountsService {
             Accounts accounts = accountsRepository.findById(accountNumber).orElseThrow(
                     () -> new ResourceNotFoundException("Account", "AccountNumber", accountNumber.toString())
             );
-            accounts.setCommunicationSw(true);
+            // accounts.setCommunicationSw(true);
             accountsRepository.save(accounts);
             isUpdated = true;
         }
@@ -138,10 +139,7 @@ public class AccountsServiceImpl  implements IAccountsService {
 
     @Override
     public boolean sendMessage(String message) {
-      Message<String> msg = MessageBuilder
-                .withPayload(message)
-                .setHeader("contentType", "application/json")  // JSON 명시
-                .build();
+      MessageDto msg = new MessageDto("account", message);
       return streamBridge.send("sendMessage-out-0", msg);
     }
 

@@ -18,9 +18,23 @@ spring:
         connect-timeout: 1000
         ## default unlimited
         response-timeout: 2s
+    stream:
+      bindings:
+        errorEvent-out-0:  # RabbitMQ로 장애 이벤트 전송
+          destination: error-events
+        errorEvent-in-0:   # Consumer가 메시지 받음
+          destination: error-events
+          group: mail-service
   config:
     import: "optional:configserver:http://configserver-hn:80/"
 
+  rabbitmq:
+    host: 192.168.100.221
+    port: 30703
+    username: admin
+    password: admin
+    connection-timeout: 10s
+    
 management:
   endpoints:
     web:
