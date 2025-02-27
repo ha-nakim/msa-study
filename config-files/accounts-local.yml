@@ -35,7 +35,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:9100/eureka/ #Eureka Server 명시
 accounts:
-  message: "Welcome to EazyBank accounts related QA APIs change rerererererer change"
+  message: "Welcome to EazyBank accounts related QA APIs change aaaaa change!!!!!!"
   contactDetails:
     name: "Smitha Ray - QA Lead"
     email: "smitha@eazybank.com"
