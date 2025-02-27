@@ -21,6 +21,8 @@ spring:
           destination: hn-send-communication
         sendMessage-out-0:
           destination: message-send
+        circuitBreakerTopic-out-0:
+          destination: hn-circuitbreaker-send
 
 # actuator
 management:

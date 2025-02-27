@@ -20,34 +20,37 @@ public class GatewayserverApplication {
 	}
 
   @Bean
-	public RouteLocator mgbankRouteConfig(RouteLocatorBuilder routeLocatorBuilder) {
+	public RouteLocator routeConfig(RouteLocatorBuilder routeLocatorBuilder) {
 		logger.debug("Configuring routes for TEAM7");
 		return routeLocatorBuilder.routes()
             .route("accounts", p -> p
                 .path("/team7/accounts/**")
                 .filters( f -> f.rewritePath("/team7/accounts/(?<segment>.*)","/${segment}")
-                    .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-                    .circuitBreaker(config -> config.setName("accountsCircuitBreaker")
-                      .setFallbackUri("forward:/fallback?routeId=accounts")
-                    )
+                  .addRequestHeader("X-Service-Id", "accounts")
+                  .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                  .circuitBreaker(config -> config.setName("accountsCircuitBreaker")
+                    .setFallbackUri("forward:/fallback")
+                  )
                 )
                 .uri("lb://ACCOUNTS"))
             .route("loans", p -> p
                 .path("/team7/loans/**")
                 .filters( f -> f.rewritePath("/team7/loans/(?<segment>.*)","/${segment}")
-                    .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-                    .circuitBreaker(config -> config.setName("loansCircuitBreaker")
-                      .setFallbackUri("forward:/fallback?routeId=loans")
-                    )
+                  .addRequestHeader("X-Service-Id", "loans")
+                  .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                  .circuitBreaker(config -> config.setName("loansCircuitBreaker")
+                    .setFallbackUri("forward:/fallback?routeId=loans")
+                  )
                 )
                 .uri("lb://LOANS"))
             .route("cards", p -> p
                 .path("/team7/cards/**")
                 .filters( f -> f.rewritePath("/team7/cards/(?<segment>.*)","/${segment}")
-                    .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-                    .circuitBreaker(config -> config.setName("cardsCircuitBreaker")
-                      .setFallbackUri("forward:/fallback?routeId=cards")
-                    )
+                  .addRequestHeader("X-Service-Id", "cards")
+                  .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                  .circuitBreaker(config -> config.setName("cardsCircuitBreaker")
+                    .setFallbackUri("forward:/fallback?routeId=cards")
+                  )
                 )
                 .uri("lb://CARDS")).build();
 	}

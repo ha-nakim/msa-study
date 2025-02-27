@@ -142,5 +142,4 @@ public class AccountsServiceImpl  implements IAccountsService {
       return streamBridge.send("sendMessage-out-0", msg);
     }
 
-
 }

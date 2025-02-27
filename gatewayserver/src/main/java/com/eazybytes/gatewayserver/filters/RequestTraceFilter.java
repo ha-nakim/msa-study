@@ -12,7 +12,7 @@ import org.springframework.web.server.ServerWebExchange;
 
 import reactor.core.publisher.Mono;
 
-@Order(1)
+@Order(-1)
 @Component
 public class RequestTraceFilter implements GlobalFilter {
 
@@ -24,6 +24,10 @@ public class RequestTraceFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         HttpHeaders requestHeaders = exchange.getRequest().getHeaders();
+        // 요청 URL 가져오기
+        String originalUrl = exchange.getRequest().getURI().toString();
+        System.out.println("Original Request URL: " + originalUrl);
+
         if (isCorrelationIdPresent(requestHeaders)) {
             logger.debug("team7-correlation-id found in RequestTraceFilter : {}",
                     filterUtility.getCorrelationId(requestHeaders));
@@ -32,6 +36,7 @@ public class RequestTraceFilter implements GlobalFilter {
             exchange = filterUtility.setCorrelationId(exchange, correlationID);
             logger.debug("team7-correlation-id generated in RequestTraceFilter : {}", correlationID);
         }
+        filterUtility.setRequestHeader(exchange, "X-Original-URL", originalUrl);
         return chain.filter(exchange);
     }
 

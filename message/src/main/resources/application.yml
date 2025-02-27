@@ -18,3 +18,6 @@ spring:
         message-in-0:
           destination: message-send
           group: ${spring.application.name}
+        circuitBreakerTopic-in-0:
+          destination: hn-circuitbreaker-send
+          group: ${spring.application.name}

@@ -39,4 +39,5 @@ public interface IAccountsService {
     boolean updateCommunicationStatus(Long accountNumber);
 
     boolean sendMessage(String message);
+
 }
