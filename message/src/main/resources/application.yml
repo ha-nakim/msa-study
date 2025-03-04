@@ -9,7 +9,7 @@ spring:
   cloud:
     function:
       # definition: email|sms; message;
-      definition: email; message;
+      definition: email; message; circuitBreakerTopic;
     stream:
       bindings:
         email-in-0:

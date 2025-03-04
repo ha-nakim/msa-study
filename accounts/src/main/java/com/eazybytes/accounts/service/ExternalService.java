@@ -9,7 +9,6 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 public class ExternalService {
-  private final Random random = new Random();
 
   @CircuitBreaker(name="hnServiceCircuitBreaker", fallbackMethod = "fallbackMethod")
   public String callExternalService() {
