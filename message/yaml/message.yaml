@@ -1,0 +1,37 @@
+# gatewayserver.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-hn
+  namespace: group1-team7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: message-hn
+  template:
+    metadata:
+      labels:
+        app: message-hn
+    spec:
+      containers:
+      - name: message-hn
+        image: k8s-vga-worker1:5000/group1-team7-message-hn:latest
+        imagePullPolicy: Always #IfNotPresent
+        ports:
+        - containerPort: 9310
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: message-hn
+  namespace: group1-team7
+spec:
+  selector:
+    app: message-hn
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9310
+      nodePort: 30737
+  type: NodePort
